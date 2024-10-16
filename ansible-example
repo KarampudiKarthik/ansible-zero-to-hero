@@ -6,7 +6,7 @@ tasks:
   - name: Create EC2 instances
     amazon.aws.ec2_instance:
       name: "sms" // we need to edit
-      key_name: "abhi-aws-keypair"   // we need to edit
+      key_name: "ademo_jjj"   // we need to edit
       instance_type: t2.micro
       security_group: default
       region: ap-south-1
@@ -21,7 +21,7 @@ for multiple ec2
   - name: Create EC2 instances
     amazon.aws.ec2_instance:
       name: "{{ item.name }}" // we need to edit  // it will look in the loop section
-      key_name: "abhi-aws-keypair"
+      key_name: "demo_jjj"
       instance_type: t2.micro
       security_group: default
       region: ap-south-1
