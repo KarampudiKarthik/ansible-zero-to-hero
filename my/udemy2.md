@@ -54,3 +54,4 @@ tree
 ```
 ![image_alt](https://github.com/KarampudiKarthik/ansible-zero-to-hero/blob/main/my/images/Capture1.PNG?raw=true)
 
+then we can do it accordingly
