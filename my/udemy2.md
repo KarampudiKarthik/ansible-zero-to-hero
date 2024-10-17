@@ -55,3 +55,52 @@ tree
 ![image_alt](https://github.com/KarampudiKarthik/ansible-zero-to-hero/blob/main/my/images/Capture1.PNG?raw=true)
 
 then we can do it accordingly
+
+## Ansible for AWS
+documentation: https://docs.ansible.com/ansible/latest/collections/amazon/aws/docsite/guide_aws.html
+
+example: create key pair and save it
+requirement: install boto3
+```
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: create key pair
+      ec2_key:
+        name:sample
+        region:us-east-1
+      register:keyout
+
+    - name: print key  # it will print key in command shell
+      debug:
+        var:keyout
+
+    - name: save key  # it will save key in sample.pem file in present directory
+      copy:
+        content:"{{keyout.key.private_key}}"
+        dest:./sample.pem
+      when: keyout.changed
+```
+
+example: launch EC2
+
+requirement: install aws collection
+```
+ansible-galaxy collection install amazon.aws
+```
+
+```
+- name: start an instance 
+  amazon.aws.ec2_instance:
+    name: "public-compute-instance"
+    key_name: "sample"
+    #vpc_subnet_id: subnet-5ca1ab1e
+    instance_type: t2.micro
+    security_group: default
+    #network_interfaces:
+     # - assign_public_ip: true
+    image_id: ami-123456  # get it from aws console
+    exact_count: 1  # if we run multiple times. only 1 instance will create
+    region: us-east-1
+    tags:
+      Environment: Testing
