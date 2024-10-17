@@ -22,3 +22,36 @@ sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
+# Inventory and ping module
+
+Establish connection b/w controller and nodes. so, we need inventory file. which consists of host, ip adress, groups. etc
+
+documention: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html
+
+>create folder, in that folder we need to get all the files like .pem, inventory, playbook
+>>we need to change permission for `.pem` file
+```
+chmod 400 demo_jjj.pem
+```
+### Create inventory file
+
+```
+all
+  hosts:
+    web01
+      ansible_host:54.242.228.10  # control ec2 ip address
+      ansible_user:ec2-user
+      ansible_ssh_access_key_file:demo_jjj.pem
+```
+to check 
+```
+ansible web01 -m ping -i inventory
+```
+
+
+
+
+
+
+
+
