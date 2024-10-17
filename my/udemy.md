@@ -34,7 +34,7 @@ documention: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inven
 chmod 400 demo_jjj.pem
 ```
 ### Create inventory file
-
+g1. for ungrouped
 ```
 all
   hosts:
@@ -47,9 +47,60 @@ to check
 ```
 ansible web01 -m ping -i inventory
 ```
+2.  for grouped
+```
+all
+  hosts:
+    web01
+      ansible_host:54.242.228.10  # control ec2 ip address
+    web01
+      ansible_host:54.242.228.10
+    web01
+      ansible_host:54.242.228.10
 
 
+  children:
+    webservers:
+      hosts:
+        web01:
+        web02:
+    dbservers:
+      hosts:
+        db01:
+      vars:
+        ansible_user:ec2-user
+        ansible_ssh_access_key_file:demo_jjj.pem
+        
+```
+3. for group in a grouped
+```
+all
+  hosts:
+    web01
+      ansible_host:54.242.228.10  # control ec2 ip address
+    web01
+      ansible_host:54.242.228.10
+    web01
+      ansible_host:54.242.228.10
 
+
+  children:
+    webservers:
+      hosts:
+        web01:
+        web02:
+    dbservers:
+      hosts:
+        db01:
+    groups_3:
+      children:
+        webservers:
+        dbservers:
+      vars:
+        ansible_user:ec2-user
+        ansible_ssh_access_key_file:demo_jjj.pem
+        
+```
 
 
 
