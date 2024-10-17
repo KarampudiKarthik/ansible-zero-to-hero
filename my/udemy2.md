@@ -90,17 +90,20 @@ ansible-galaxy collection install amazon.aws
 ```
 
 ```
-- name: start an instance 
-  amazon.aws.ec2_instance:
-    name: "public-compute-instance"
-    key_name: "sample"
-    #vpc_subnet_id: subnet-5ca1ab1e
-    instance_type: t2.micro
-    security_group: default
-    #network_interfaces:
-     # - assign_public_ip: true
-    image_id: ami-123456  # get it from aws console
-    exact_count: 1  # if we run multiple times. only 1 instance will create
-    region: us-east-1
-    tags:
-      Environment: Testing
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: start an instance 
+      amazon.aws.ec2_instance:
+        name: "public-compute-instance"
+        key_name: "sample"
+        #vpc_subnet_id: subnet-5ca1ab1e
+        instance_type: t2.micro
+        security_group: default
+        #network_interfaces:
+        # - assign_public_ip: true
+        image_id: ami-123456  # get it from aws console
+        exact_count: 1  # if we run multiple times. only 1 instance will create
+        region: us-east-1
+        tags:
+          Environment: Testing
