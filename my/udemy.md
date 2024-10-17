@@ -1,0 +1,2 @@
+## create EC2 instance
+![image alt](https://github.com/KarampudiKarthik/ansible-zero-to-hero/blob/main/my/images/Capture.PNG?raw=true)
